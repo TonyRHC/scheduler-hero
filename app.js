@@ -8,6 +8,20 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+var mongoose = require("mongoose");
+
+// mongodb connection
+const db = require("./config/keys").mongoURI;
+mongoose
+  .connect(
+    db,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }
+  )
+  .then(() => console.log("MongoDB successfully connected"))
+  .catch(err => console.log(err));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
